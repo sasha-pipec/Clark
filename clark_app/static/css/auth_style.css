@@ -1,0 +1,187 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+html{height:100%}
+body{line-height:1}
+ol,ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
+table{border-collapse:collapse;border-spacing:0}
+
+a{
+    text-decoration:none;
+    display:block;
+}
+
+.auth_page{
+    width:1500px;
+    margin:auto;
+}
+
+.auth_page_header{
+    height:129px;
+    display:flex;
+    margin:auto;
+}
+
+.auth_page_header_logo{
+    display:inline-flex;
+}
+
+.auth_page_header_logo_img{
+    height:43px;
+    width:45px;
+    margin:auto;
+}
+
+.auth_page_header_logo_text{
+    color: #313131;
+    font-family: 'Inter', sans-serif;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin:auto;
+    padding-left:10px;
+}
+
+.auth_page_content{
+    display:flex;
+}
+
+.auth_page_content_left{
+    margin-left:-70px;
+}
+
+.auth_page_content_right{
+    margin-left:-200px;
+}
+
+.auth_page_content_right_form{
+    height:772px;
+    width:836px;
+    fill: linear-gradient(0deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.10) 100%), linear-gradient(111deg, rgba(255, 255, 255, 0.16) 1.35%, rgba(255, 255, 255, 0.00) 100%);
+    stroke-width: 1px;
+    stroke: #CE304A;
+    filter: drop-shadow(7px 7px 18px rgba(0, 0, 0, 0.25));
+    backdrop-filter: blur(35px);
+    border:1px solid red;
+    border-radius: 20px;
+}
+
+.auth_page_content_right_form_container{
+    width:665px;
+    display:flex;
+    margin:auto;
+}
+
+.auth_page_content_right_form_title_text{
+    color: #313131;
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top:58px;
+    margin-bottom:81px;
+}
+
+.auth_page_content_right_form_inputs{
+    padding-left:40px;
+}
+
+.auth_page_content_right_form_inputs_item{
+    margin-bottom:30px;
+}
+
+.auth_page_content_right_form_inputs_item_label_text{
+    color: #313131;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom:30px;
+}
+
+.auth_page_content_right_form_inputs_item_input_inner{
+    border-radius: 50px;
+    border: 1px solid #CE314A;
+    width: 581px;
+    height: 60px;
+}
+
+.auth_page_content_right_form_btn_auth{
+    width: 581px;
+    height: 60px;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #CD2F49 2.65%, #E59D72 99.82%);
+    border:none;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+#auth_page_content_right_form_inputs_item_lines{
+    height:124px;
+    width:580px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.auth_page_content_right_form_inputs_item_input_link{
+    width: 581px;
+    height: 60px;
+    border-radius: 50px;
+    border: 1px solid #FE0101;
+    text-align:center;
+    display:flex;
+}
+
+.auth_page_content_right_form_btn_register{
+    color: #CE314A;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+     margin:auto;
+}
+
+.line_br{
+    width:250px;
+    background-clor:red;
+}
+
+.line_left{
+    margin:auto;
+}
+
+.line_right{
+    margin:auto;
+}
+
+.word{
+    margin:auto;
+    color: #E1896B;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.auth_page_content_right_form_inputs_item_input_link_register{
+    margin-top:40px;
+}
+
+#auth_page_content_right_form_title_text_register{
+    text-align:center;
+}
+
+#auth_page_content_right_form_title_text_register_inner{
+     margin-bottom:40px;
+}

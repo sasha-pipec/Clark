@@ -37,9 +37,9 @@ body {
 }
 
 .main_header{
-    height:154px;
+    height:129px;
     width:100%;
-    line-height: 154px;
+    line-height: 129px;
     display:inline-flex;
     justify-content:space-between;
 }

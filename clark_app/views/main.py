@@ -8,3 +8,15 @@ class MainPageView(View):
         if request.user.is_authenticated:
             return render(request, 'clark_app/main.html')
         return render(request, 'clark_app/main.html')
+
+
+class AuthPageView(View):
+
+    def get(self, request):
+        return render(request, 'clark_app/authorization.html')
+
+
+class RegisterPageView(View):
+
+    def get(self, request):
+        return render(request, 'clark_app/registration.html')
