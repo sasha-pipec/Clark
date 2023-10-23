@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'api',
+    'clark_app',
     'models_app.apps.ModelsAppConfig',
     "rest_framework",
     'service_objects',
