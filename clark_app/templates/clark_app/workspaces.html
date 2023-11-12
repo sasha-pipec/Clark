@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Рабочие пространства</title>
+    <link rel="stylesheet" href="{% static 'css/workspace_style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<script src="{% static 'js/popap_create_workspace.js' %}"></script>
+<div class="main">
+    <div class="main_workspace">
+        <div class="main_workspace_header">
+            <div class="main_workspace_header_logo">
+                <img class="main_workspace_header_logo_img" src="{% static 'images/workspace_logo_img.png' %}" alt="">
+                <p class="main_workspace_header_logo_text">Clark</p>
+            </div>
+        </div>
+        <div class="main_workspace_content">
+            <div class="main_workspace_content_header">
+                <h1 class="main_workspace_content_header_text">
+                    Рады вас видеть!
+                </h1>
+            </div>
+            <div class="main_workspace_content_workspaces">
+                <div class="main_workspace_content_workspaces_top">
+                    <p class="main_workspace_content_workspaces_top_text">
+                        Рабочие пространства для ivanrazarenov5@gmail.com
+                    </p>
+                </div>
+                <div class="main_workspace_content_workspaces_bottom">
+                    <div class="main_workspace_content_workspaces_bottom_left">
+                        <div class="main_workspace_content_workspaces_bottom_left_content">
+                            <div class="main_workspace_content_workspaces_bottom_left_content_left">
+                                <img class="main_workspace_content_workspaces_bottom_left_content_left_img" src="{% static 'images/test_icon.png' %}"
+                                     alt="">
+                            </div>
+                            <div class="main_workspace_content_workspaces_bottom_left_content_right">
+                                <div class="main_workspace_content_workspaces_bottom_left_content_right_top">
+                                    <p class="main_workspace_content_workspaces_bottom_left_content_right_top_title">
+                                        Project tracker
+                                    </p>
+                                </div>
+                                <div class="main_workspace_content_workspaces_bottom_left_content_right_bottom">
+                                    <div class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images">
+                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
+                                             src="{% static 'images/test_icin_item.png' %}" alt="">
+                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
+                                             src="{% static 'images/test_icin_item.png' %}" alt="">
+                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
+                                             src="{% static 'images/test_icin_item.png' %}" alt="">
+                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
+                                             src="{% static 'images/test_icin_item.png' %}" alt="">
+                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
+                                             src="{% static 'images/test_icin_item.png' %}" alt="">
+                                    </div>
+                                    <div class="main_workspace_content_workspaces_bottom_left_content_right_bottom_info">
+                                        <p class="main_workspace_content_workspaces_bottom_left_content_right_bottom_info_text">
+                                            3 участника
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main_workspace_content_workspaces_bottom_right">
+                        <div class="main_workspace_content_workspaces_bottom_right_link">
+                            <a href="" class="main_workspace_content_workspaces_bottom_right_link_item">
+                                Запустить Clark
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_workspace_content_create_workspace">
+                <div class="main_workspace_content_create_workspace_l">
+                    <img src="{% static 'images/workspace_create_icon.png' %}" alt="" class="main_workspace_content_create_workspace_l_img">
+                </div>
+                <div class="main_workspace_content_create_workspace_r">
+                    <div class="main_workspace_content_create_workspace_r_text">
+                        <p class="main_workspace_content_create_workspace_r_text_inner">
+                            Хотите использовать Clark с другой командой?
+                        </p>
+                    </div>
+                    <div class="main_workspace_content_create_workspace_r_btn">
+                        <button onclick="open_popap();" class="main_workspace_content_create_workspace_r_btn_item">Создать пространство</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main_create_workspace" id="popap">
+        <div class="main_create_workspace_form">
+            <form  class="main_create_workspace_form_item">
+                <div class="main_create_workspace_form_item_top">
+                    <p class="main_create_workspace_form_item_top_text">
+                        Создание нового пространства
+                    </p>
+                    <a onclick="close_popap();"><img src="{% static 'images/close_create_workspace.png' %}" alt="" class="main_create_workspace_form_item_top_img"></a>
+                </div>
+                <div class="main_create_workspace_form_item_main">
+                    <div class="main_create_workspace_form_item_main_item">
+                        <p class="main_create_workspace_form_item_main_item_text">
+                            Как называется ваше пространство?
+                        </p>
+                        <input type="text" class="main_create_workspace_form_item_main_item_text_input">
+                    </div>
+                    <div class="main_create_workspace_form_item_main_item">
+                        <p class="main_create_workspace_form_item_main_item_text">
+                            Чем вы занимаетесь?
+                        </p>
+                        <input type="text" class="main_create_workspace_form_item_main_item_text_input">
+                    </div>
+                    <a onclick="open_image();" id="open_image">
+                    <div class="main_create_workspace_form_item_main_item">
+                        <p class="main_create_workspace_form_item_main_item_text">
+                            Теперь выберите аватар
+                        </p>
+                        <input type="file" class="image_input_hide" id="image_input">
+                        <div class="main_create_workspace_form_item_main_item_image_block">
+                            <p class="main_create_workspace_form_item_main_item_image_block_text">
+                                загрузите файл
+                            </p>
+                            <div class="main_create_workspace_form_item_main_item_image_block_circle">
+
+                            </div>
+                        </div>
+                    </div>
+                        </a>
+                </div>
+                <div class="main_create_workspace_form_item_bottom">
+                    <button class="main_create_workspace_form_item_bottom_btn">Создать пространство</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

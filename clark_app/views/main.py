@@ -20,3 +20,15 @@ class RegisterPageView(View):
 
     def get(self, request):
         return render(request, 'clark_app/registration.html')
+
+
+class ConfirmEmailPageView(View):
+
+    def get(self, request):
+        return render(request, 'clark_app/confirm_email.html')
+
+
+class WorkspacePageView(View):
+
+    def get(self, request):
+        return render(request, 'clark_app/workspaces.html')

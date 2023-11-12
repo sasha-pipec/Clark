@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Подтверждение</title>
+    <link rel="stylesheet" href="{% static 'css/auth_style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="auth_page">
+    <a href="{% url 'main' %}">
+        <div class="auth_page_header">
+            <div class="auth_page_header_logo">
+                <img class="auth_page_header_logo_img" src="{% static 'images/main_header_logo.png' %}" alt="">
+                <p class="auth_page_header_logo_text">Clark</p>
+            </div>
+        </div>
+    </a>
+    <div class="auth_page_content">
+        <div class="auth_page_content_left">
+            <img class="auth_page_content_left_image" src="{% static 'images/confiirm_email_page_convert.png' %}" alt="">
+        </div>
+        <div class="auth_page_content_right">
+            <form class="auth_page_content_right_form" action="{% url 'workspace' %}">
+                <div class="auth_page_content_right_form_container">
+                    <div class="auth_page_content_right_form_container_inner confirm">
+                        <div class="auth_page_content_right_form_title" id="auth_page_content_right_form_title_text_register">
+                            <h1 class="auth_page_content_right_form_title_text" id="auth_page_content_right_form_title_text_register_inner">
+                                Проверьте эл.почту <br>
+                                на наличие кода
+                            </h1>
+                        </div>
+                        <div class="auth_page_content_right_form_inputs">
+                            <div class="auth_page_content_right_form_inputs_line">
+                                <div class="auth_page_content_right_form_inputs_line_item">
+                                    <input type="text" class="confirm_digit_item" maxlength="1" id="confirm1"
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length === 1) document.querySelector('#confirm2').focus();">
+                                </div>
+                                <div class="auth_page_content_right_form_inputs_line_item">
+                                    <input type="text" class="confirm_digit_item" maxlength="1" id="confirm2"
+                                          oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length === 1) document.querySelector('#confirm3').focus();">
+                                </div>
+                                <div class="auth_page_content_right_form_inputs_line_item">
+                                    <input type="text" class="confirm_digit_item" maxlength="1" id="confirm3"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length === 1) document.querySelector('#confirm4').focus();">
+                                </div>
+                                <div class="auth_page_content_right_form_inputs_line_item">
+                                    <input type="text" class="confirm_digit_item" maxlength="1" id="confirm4"
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length === 1) document.querySelector('#confirm5').focus();">
+                                </div>
+                                <div class="auth_page_content_right_form_inputs_line_item">
+                                    <input type="text" class="confirm_digit_item" maxlength="1" id="confirm5"
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                </div>
+                            </div>
+                            <div class="auth_page_content_right_form_btn">
+                                <button type="submit" class="confirm_btn">Отправить</button>
+                            </div>
+                            <div class="auth_page_content_right_form_message">
+                                <p class="auth_page_content_right_form_message">Код не пришел? Проверьте папку спама</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

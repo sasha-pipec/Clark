@@ -108,6 +108,12 @@ a{
     border: 1px solid #CE314A;
     width: 581px;
     height: 60px;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    border-sizing:border-box;
+    padding-left:30px;
 }
 
 .auth_page_content_right_form_btn_auth{
@@ -184,4 +190,71 @@ a{
 
 #auth_page_content_right_form_title_text_register_inner{
      margin-bottom:40px;
+}
+
+.auth_reg{
+    margin-top:30px;
+}
+
+.auth_page_content_right_form_inputs_line{
+    display:flex;
+    justify-content:space-between;
+    margin-top:85px;
+}
+
+.confirm_digit_item{
+    width:102px;
+    height:136px;
+    background:none;
+    border-radius: 40px;
+    border: 2px solid #313131;
+    font-size:50px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-left:32.5px;
+    box-sizing:border-box;
+}
+
+.confirm{
+    width:100%;
+}
+
+.auth_page_content_right_form_btn{
+    text-align:center;
+}
+
+.confirm_btn{
+    width:312px;
+    height:52px;
+    background:none;
+    border-radius: 50px;
+    border: 1px solid #000;
+    color: #E49971;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top:85px;
+}
+
+.auth_page_content_right_form_message{
+    text-align:center;
+}
+
+.auth_page_content_right_form_message{
+    color: #313131;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin-top:185px;
+}
+
+.line_br{
+    color:red;
+    background-color: red;
 }
