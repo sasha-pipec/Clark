@@ -121,3 +121,11 @@ MEDIA_URL = "/uploads/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'models_app.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'razarenov.aleksandar@yandex.ru'
+EMAIL_HOST_PASSWORD = 'Love9268/'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
