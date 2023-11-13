@@ -8,7 +8,16 @@ from api.services.user.confirm_email import UserConfirmEmailService
 from api.services.user.create import UserCreateService
 
 
-class UserCreateView(View):
+class UserCreateLoginView(View):
+
+    def get(self, request):
+        user = authenticate(request, email=request.GET['email'], password=request.GET['password'])
+        if user is not None:
+            login(request, user)
+            return redirect('workspace')
+        return render(request, 'clark_app/authorization.html', context={
+            'error': 'Неверная почта или пароль'
+        })
 
     @transaction.atomic
     def post(self, request):

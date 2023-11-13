@@ -25,7 +25,7 @@
             <img class="auth_page_content_left_image" src="{% static 'images/auth_page_lock.png' %}" alt="">
         </div>
         <div class="auth_page_content_right">
-            <form class="auth_page_content_right_form" action="">
+            <form class="auth_page_content_right_form" action="{% url 'users' %}" method="get">
                 <div class="auth_page_content_right_form_container">
                     <div class="auth_page_content_right_form_container_inner">
                         <div class="auth_page_content_right_form_title">
@@ -70,6 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="auth_page_content_right_form_inputs_item_input">
+                                    <p>{{error}}</p>
                                     <div class="auth_page_content_right_form_inputs_item_input_link"
                                          id="auth_page_content_right_form_inputs_item_input_link_register">
                                         <a href="{% url 'register' %}" class="auth_page_content_right_form_btn_register">Зарегистрироваться</a>
