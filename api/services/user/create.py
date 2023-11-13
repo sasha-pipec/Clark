@@ -1,3 +1,4 @@
+from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import ValidationError
 from service_objects.services import ServiceWithResult
 from django import forms
@@ -26,7 +27,14 @@ class UserCreateService(ServiceWithResult):
         confirmation_code = confirm_registration(user.email)
         user.confirmation_code = confirmation_code
         user.save()
-        return user
+        return {
+            'user': user,
+            'token': self._token_create(user)
+        }
+
+    @staticmethod
+    def _token_create(user):
+        return Token.objects.create(user=user).key
 
     def password_confirm(self):
         if self.data.get('password_confirm') and self.data['password_confirm'] != self.cleaned_data['password']:

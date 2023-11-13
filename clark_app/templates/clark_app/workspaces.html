@@ -26,55 +26,13 @@
                     Рады вас видеть!
                 </h1>
             </div>
-            <div class="main_workspace_content_workspaces">
+            <div class="main_workspace_content_workspaces" id="workspaces">
                 <div class="main_workspace_content_workspaces_top">
-                    <p class="main_workspace_content_workspaces_top_text">
-                        Рабочие пространства для ivanrazarenov5@gmail.com
+                    <p class="main_workspace_content_workspaces_top_text" id="user_email">
+
                     </p>
                 </div>
-                <div class="main_workspace_content_workspaces_bottom">
-                    <div class="main_workspace_content_workspaces_bottom_left">
-                        <div class="main_workspace_content_workspaces_bottom_left_content">
-                            <div class="main_workspace_content_workspaces_bottom_left_content_left">
-                                <img class="main_workspace_content_workspaces_bottom_left_content_left_img" src="{% static 'images/test_icon.png' %}"
-                                     alt="">
-                            </div>
-                            <div class="main_workspace_content_workspaces_bottom_left_content_right">
-                                <div class="main_workspace_content_workspaces_bottom_left_content_right_top">
-                                    <p class="main_workspace_content_workspaces_bottom_left_content_right_top_title">
-                                        Project tracker
-                                    </p>
-                                </div>
-                                <div class="main_workspace_content_workspaces_bottom_left_content_right_bottom">
-                                    <div class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images">
-                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
-                                             src="{% static 'images/test_icin_item.png' %}" alt="">
-                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
-                                             src="{% static 'images/test_icin_item.png' %}" alt="">
-                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
-                                             src="{% static 'images/test_icin_item.png' %}" alt="">
-                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
-                                             src="{% static 'images/test_icin_item.png' %}" alt="">
-                                        <img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"
-                                             src="{% static 'images/test_icin_item.png' %}" alt="">
-                                    </div>
-                                    <div class="main_workspace_content_workspaces_bottom_left_content_right_bottom_info">
-                                        <p class="main_workspace_content_workspaces_bottom_left_content_right_bottom_info_text">
-                                            3 участника
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main_workspace_content_workspaces_bottom_right">
-                        <div class="main_workspace_content_workspaces_bottom_right_link">
-                            <a href="" class="main_workspace_content_workspaces_bottom_right_link_item">
-                                Запустить Clark
-                            </a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="main_workspace_content_create_workspace">
                 <div class="main_workspace_content_create_workspace_l">
@@ -139,5 +97,72 @@
         </div>
     </div>
 </div>
+<script>
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Token {{user.auth_token}}');
+    fetch('http://127.0.0.1:8000/api/users/me/',{
+        method: 'GET',
+        headers: headers,
+    })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+        .then(data => {
+        // Обработка данных, полученных от сервера
+        // Например, вставим каждый элемент массива в элемент с id="result"
+        console.log(data);
+        const userEmail = document.getElementById('user_email');
+        userEmail.textContent = 'Рабочие пространства для '+data['email']
+        var workspaces_html = '';
+        data['workspaces'].forEach(item => {
+            workspaces_html += '<div class="main_workspace_content_workspaces_bottom">'+
+            '<div class="main_workspace_content_workspaces_bottom_left">'+
+            '<div class="main_workspace_content_workspaces_bottom_left_content">' +
+            '<div class="main_workspace_content_workspaces_bottom_left_content_left">'+
+            '<img class="main_workspace_content_workspaces_bottom_left_content_left_img" src="'+item['image']+'" alt="">'+
+            '</div>'+
+            '<div class="main_workspace_content_workspaces_bottom_left_content_right">'+
+            '<div class="main_workspace_content_workspaces_bottom_left_content_right_top">'+
+            '<p class="main_workspace_content_workspaces_bottom_left_content_right_top_title">'+item['name']+'</p>'+
+            '</div>'+
+            '<div class="main_workspace_content_workspaces_bottom_left_content_right_bottom">'+
+            '<div class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images">';
+            item['users'].forEach(image=>{
+                if(image['image']!=null){
+                    workspaces_html += '<img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"  src="'+image['image']+'" alt="">';
+                }
+            });
+            workspaces_html+= '</div>'+
+            '<div class="main_workspace_content_workspaces_bottom_left_content_right_bottom_info">'+
+            '<p class="main_workspace_content_workspaces_bottom_left_content_right_bottom_info_text">'+item['users_count']+' участника</p>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '<div class="main_workspace_content_workspaces_bottom_right">'+
+            '<div class="main_workspace_content_workspaces_bottom_right_link">'+
+            '<a href="" class="main_workspace_content_workspaces_bottom_right_link_item">Запустить Clark</a>'+
+            '</div>'+
+            '</div>'+
+            '</div>';
+        });
+        console.log(workspaces_html)
+        const workspaces = document.getElementById('workspaces');
+        workspaces.innerHTML += workspaces_html;
+    })
+        .catch(error => {
+        console.error('Error during fetch operation:', error);
+    });
+
+    //    function updateHtml(data) {
+    //        const resultElement = document.getElementById('result');
+    //        resultElement.innerHTML = `<p>${data.message}</p>`;
+    //    }
+</script>
 </body>
 </html>

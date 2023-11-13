@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'api',
     'clark_app',
     'models_app.apps.ModelsAppConfig',
-    "rest_framework",
+    'rest_framework',
+    'rest_framework.authtoken',
     'service_objects',
 ]
 
