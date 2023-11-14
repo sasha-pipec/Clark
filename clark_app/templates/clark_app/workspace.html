@@ -1,10 +1,55 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+     <link rel="stylesheet" href="{% static 'css/workspace_detail_style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-Рабочее пространство
+<div class="main_workspace">
+    <div class="main_workspace_header">
+        <div class="empty_block">
+
+        </div>
+        <div class="header_search">
+            <input type="text" class="search_input" placeholder="Поиск в проекте">
+        </div>
+        <div class="header_avatar">
+            <img src="{% static 'images/test_avatar.png' %}" alt="" class="avatar_img">
+        </div>
+    </div>
+    <div class="main_workspace_container">
+        <div class="container_left">
+            <div class="workspace_title">
+                <div class="workspace_title_inner">
+                    <p class="title_text">Project Tracker</p>
+                    <img src="{% static 'images/workspace_img_title.png' %}" alt="" class="title_img">
+                </div>
+            </div>
+            <div class="main_navbar">
+                <div class="navbar_item">
+                    <a href="" class="navbar_item_text">Ответы</a>
+                </div>
+                <div class="navbar_item">
+                    <a href="" class="navbar_item_text">Личные сообщения</a>
+                </div>
+                <div class="navbar_item">
+                    <a href="" class="navbar_item_text">Упоминания & Реакции</a>
+                </div>
+            </div>
+        </div>
+        <div class="container_main">
+
+        </div>
+        <div class="container_right">
+
+        </div>
+    </div>
+</div>
 </body>
 </html>
