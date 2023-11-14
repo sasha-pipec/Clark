@@ -35,3 +35,10 @@ class WorkspacePageView(View):
     @method_decorator(login_required(login_url='auth'))
     def get(self, request):
         return render(request, 'clark_app/workspaces.html')
+
+
+class WorkspaceDetailPageView(View):
+
+    @method_decorator(login_required(login_url='auth'))
+    def get(self, request, id):
+        return render(request, 'clark_app/workspace.html')

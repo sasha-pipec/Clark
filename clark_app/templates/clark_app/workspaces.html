@@ -53,7 +53,8 @@
     </div>
     <div class="main_create_workspace" id="popap">
         <div class="main_create_workspace_form">
-            <form  class="main_create_workspace_form_item">
+            <form  class="main_create_workspace_form_item" enctype="multipart/form-data" action="{% url 'workspace_create' %}" method="post">
+                {% csrf_token %}
                 <div class="main_create_workspace_form_item_top">
                     <p class="main_create_workspace_form_item_top_text">
                         Создание нового пространства
@@ -65,20 +66,20 @@
                         <p class="main_create_workspace_form_item_main_item_text">
                             Как называется ваше пространство?
                         </p>
-                        <input type="text" class="main_create_workspace_form_item_main_item_text_input">
+                        <input type="text" class="main_create_workspace_form_item_main_item_text_input" name="name">
                     </div>
                     <div class="main_create_workspace_form_item_main_item">
                         <p class="main_create_workspace_form_item_main_item_text">
                             Чем вы занимаетесь?
                         </p>
-                        <input type="text" class="main_create_workspace_form_item_main_item_text_input">
+                        <input type="text" class="main_create_workspace_form_item_main_item_text_input" name="about">
                     </div>
                     <a onclick="open_image();" id="open_image">
                     <div class="main_create_workspace_form_item_main_item">
                         <p class="main_create_workspace_form_item_main_item_text">
                             Теперь выберите аватар
                         </p>
-                        <input type="file" class="image_input_hide" id="image_input">
+                        <input type="file" class="image_input_hide" id="image_input" name="image">
                         <div class="main_create_workspace_form_item_main_item_image_block">
                             <p class="main_create_workspace_form_item_main_item_image_block_text">
                                 загрузите файл
@@ -119,6 +120,7 @@
         userEmail.textContent = 'Рабочие пространства для '+data['email']
         var workspaces_html = '';
         data['workspaces'].forEach(item => {
+            var workspace_url = ("{% url 'workspace_detail' 0 %}").replace("0",item['id']);
             workspaces_html += '<div class="main_workspace_content_workspaces_bottom">'+
             '<div class="main_workspace_content_workspaces_bottom_left">'+
             '<div class="main_workspace_content_workspaces_bottom_left_content">' +
@@ -146,7 +148,7 @@
             '</div>'+
             '<div class="main_workspace_content_workspaces_bottom_right">'+
             '<div class="main_workspace_content_workspaces_bottom_right_link">'+
-            '<a href="" class="main_workspace_content_workspaces_bottom_right_link_item">Запустить Clark</a>'+
+            '<a href="'+workspace_url+'" class="main_workspace_content_workspaces_bottom_right_link_item">Запустить Clark</a>'+
             '</div>'+
             '</div>'+
             '</div>';
