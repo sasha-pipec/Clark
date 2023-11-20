@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-     <link rel="stylesheet" href="{% static 'css/workspace_detail_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/workspace_detail_style.css' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,32 @@
                 </div>
                 <div class="navbar_item">
                     <a href="" class="navbar_item_text">Упоминания & Реакции</a>
+                </div>
+            </div>
+            <div class="channels_list">
+                <div class="channel_item">
+                    <img src="{% static 'images/list_img.png' %}" alt="" class="channel_item_img list_img">
+                    <p class="channel_item_text">Каналы</p>
+                </div>
+                <div class="channel_item">
+                    <img src="{% static 'images/public_channel_img.png' %}" alt="" class="channel_item_img">
+                    <p class="channel_item_text">бэкэнд</p>
+                </div>
+                <div class="channel_item">
+                    <img src="{% static 'images/public_channel_img.png' %}" alt="" class="channel_item_img">
+                    <p class="channel_item_text">фронтэнд</p>
+                </div>
+                <div class="channel_item active">
+                    <img src="{% static 'images/private_channel_img.png' %}" alt="" class="channel_item_img">
+                    <p class="channel_item_text">бубс</p>
+                </div>
+                <div class="channel_item">
+                    <img src="{% static 'images/public_channel_img.png' %}" alt="" class="channel_item_img">
+                    <p class="channel_item_text">оффтоп</p>
+                </div>
+                <div class="channel_item">
+                    <img src="{% static 'images/add_channel_img.png' %}" alt="" class="channel_item_img add_channel">
+                    <p class="channel_item_text add_channel_text">Добавить канал</p>
                 </div>
             </div>
         </div>

@@ -1,23 +1,53 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
-html{height:100%}
-body{line-height:1}
-ol,ul{list-style:none}
-blockquote,q{quotes:none}
-blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
-table{border-collapse:collapse;border-spacing:0}
-
-a{
-    text-decoration:none;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline
 }
 
-.main_workspace{
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block
+}
+
+html {
+    height: 100%
+}
+
+body {
+    line-height: 1
+}
+
+ol, ul {
+    list-style: none
+}
+
+blockquote, q {
+    quotes: none
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+a {
+    text-decoration: none;
+}
+
+.main_workspace {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
 }
 
-.main_workspace_header{
+.main_workspace_header {
     height: 50px;
     background-color: #E49970;
     width: 100%;
@@ -26,13 +56,13 @@ a{
     align-items: center;
 }
 
-.empty_block{
+.empty_block {
     width: 33px;
     height: 33px;
     margin-left: 22px;
 }
 
-.search_input{
+.search_input {
     width: 802px;
     height: 33px;
     border-radius: 5px;
@@ -47,25 +77,25 @@ a{
     line-height: normal;
 }
 
-.avatar_img{
+.avatar_img {
     width: 33px;
     height: 33px;
     margin-right: 22px;
 }
 
-.main_workspace_container{
+.main_workspace_container {
     width: 100%;
     height: 100%;
     background-color: #FFF;
 }
 
-.container_left{
+.container_left {
     height: 100%;
     width: 340px;
     background: #CE334B;
 }
 
-.workspace_title{
+.workspace_title {
     height: 51px;
     width: 100%;
     border-bottom: 1px solid #ECC5B1;
@@ -73,13 +103,13 @@ a{
     align-items: center;
 }
 
-.workspace_title_inner{
+.workspace_title_inner {
     display: flex;
     align-items: center;
     margin-left: 12px;
 }
 
-.title_text{
+.title_text {
     color: #FFF;
     font-family: Inter;
     font-size: 20px;
@@ -88,25 +118,83 @@ a{
     line-height: normal;
 }
 
-.title_img{
+.title_img {
     width: 8px;
     height: 4px;
     margin-left: 11px;
 }
 
-.main_navbar{
-    margin-left: 40px;
+.main_navbar {
+    margin-top: 10px;
+    border-bottom: 1px solid #ECC5B1;
 }
 
-.navbar_item{
+.navbar_item {
+    margin-left: 40px;
     height: 30px;
 }
 
-.navbar_item_text{
+.navbar_item_text {
     color: #FFF;
     font-family: Inter;
     font-size: 15px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.channels_list{
+    margin-top: 10px;
+}
+
+.channel_item {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 93%;
+    margin: auto;
+}
+
+.channel_item_img {
+    width: 8px;
+    height: 10px;
+    margin-left: 10px;
+}
+
+.channel_item_text {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 10px;
+}
+
+.channel_item_text:hover{
+    cursor: pointer;
+}
+
+.list_img {
+    width: 8px;
+    height: 4px;
+}
+
+.list_img:hover{
+    cursor: pointer;
+}
+
+.active{
+    background-color: #A5283B;
+    border-radius: 10px;
+}
+
+.add_channel{
+    width: 15px;
+    height: 15px;
+    margin-left: 8px;
+}
+
+.add_channel_text{
+    margin-left: 5px;
 }
