@@ -2,7 +2,7 @@ from django.urls import path
 
 from clark_app.views.pages import (MainPageView, AuthPageView, RegisterPageView,
                                    ConfirmEmailPageView, WorkspacePageView, WorkspaceDetailPageView)
-from clark_app.views.users import (UserCreateLoginView, UserConfirmEmailView)
+from clark_app.views.users import (UserCreateView, UserConfirmEmailView, UserLoginView)
 from clark_app.views.workspaces import (WorkspaceCreateView,)
 
 urlpatterns = [
@@ -15,7 +15,8 @@ urlpatterns = [
     path('workspaces/<int:id>/', WorkspaceDetailPageView.as_view(), name='workspace_detail'),
 
     # Users
-    path('users/', UserCreateLoginView.as_view(), name='users'),
+    path('users/', UserCreateView.as_view(), name='users'),
+    path('users/auth/', UserLoginView.as_view(), name='users_auth'),
     path('users/confirm_email/', UserConfirmEmailView.as_view(), name='users_confirm'),
 
     # Workspaces
