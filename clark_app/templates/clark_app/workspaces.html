@@ -116,12 +116,12 @@
         const userEmail = document.getElementById('user_email');
         userEmail.textContent = 'Рабочие пространства для '+data['email']
         var workspaces_html = '';
+        const workspaces = document.getElementById('workspaces');
         data['workspaces'].forEach(item => {
             var workspace_url = ("{% url 'workspace_detail' 0 %}").replace("0",item['id']);
             var image = item['image'];
             var name = item['name'];
             var users_count = item['users_count'];
-            const workspaces = document.getElementById('workspaces');
             var users = '';
             item['users'].forEach(image=>{
                 if(image['image']!=null){

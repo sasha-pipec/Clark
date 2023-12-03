@@ -2,6 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views import View
+from service_objects.services import ServiceOutcome
+
+from clark_app.services.workspace.get import WorkspaceDetailService
 
 
 class MainPageView(View):
@@ -41,4 +44,7 @@ class WorkspaceDetailPageView(View):
 
     @method_decorator(login_required(login_url='auth'))
     def get(self, request, id):
-        return render(request, 'clark_app/workspace.html')
+        outcome = ServiceOutcome(WorkspaceDetailService, {'id': id})
+        return render(request, 'clark_app/workspace.html', context={
+            'workspace': outcome.result
+        })

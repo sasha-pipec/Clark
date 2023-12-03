@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<script src="{% static 'js/open_close_items.js' %}"></script>
 <div class="main_workspace">
     <div class="main_workspace_header">
         <div class="empty_block">
@@ -27,7 +28,7 @@
         <div class="container_left">
             <div class="workspace_title">
                 <div class="workspace_title_inner">
-                    <p class="title_text">Project Tracker</p>
+                    <p class="title_text">{{workspace.name}}</p>
                     <img src="{% static 'images/workspace_img_title.png' %}" alt="" class="title_img">
                 </div>
             </div>
@@ -42,50 +43,37 @@
                     <a href="" class="navbar_item_text">Упоминания & Реакции</a>
                 </div>
             </div>
-            <div class="chats_list">
-                <div class="chat_item">
+            <div class="chats_list" id="channels">
+                <div class="chat_item" onclick="toggleChatList(this)">
                     <img src="{% static 'images/list_img.png' %}" alt="" class="chat_item_img list_img">
                     <p class="chat_item_text">Каналы</p>
                 </div>
-                <div class="chat_item">
-                    <img src="{% static 'images/public_channel_img.png' %}" alt="" class="chat_item_img">
-                    <p class="chat_item_text">бэкэнд</p>
+                <div id="chat_items">
+
                 </div>
-                <div class="chat_item">
-                    <img src="{% static 'images/public_channel_img.png' %}" alt="" class="chat_item_img">
-                    <p class="chat_item_text">фронтэнд</p>
-                </div>
-                <div class="chat_item active">
-                    <img src="{% static 'images/private_channel_img.png' %}" alt="" class="chat_item_img">
-                    <p class="chat_item_text">бубс</p>
-                </div>
-                <div class="chat_item">
-                    <img src="{% static 'images/public_channel_img.png' %}" alt="" class="chat_item_img">
-                    <p class="chat_item_text">оффтоп</p>
-                </div>
-                <div class="chat_item">
+                <div class="chat_item open">
                     <img src="{% static 'images/add_channel_img.png' %}" alt="" class="chat_item_img add_channel">
                     <p class="chat_item_text add_channel_text">Добавить канал</p>
                 </div>
             </div>
             <div class="chats_list">
-                <div class="chat_item">
+                <div class="chat_item" onclick="toggleChatList(this)">
                     <img src="{% static 'images/list_img.png' %}" alt="" class="chat_item_img list_img">
                     <p class="chat_item_text">Личные сообщения</p>
                 </div>
-                <div class="chat_item">
+                <div class="chat_item collapsed">
                     <img src="{% static 'images/test_avatar.png' %}" alt="" class="chat_item_img avatar">
                     <p class="chat_item_text direct">Максим Караичев</p>
                 </div>
-                <div class="chat_item">
+                <div class="chat_item collapsed">
                     <img src="{% static 'images/test_avatar.png' %}" alt="" class="chat_item_img avatar">
                     <p class="chat_item_text direct">Иван Разаренов</p>
                 </div>
-                <div class="chat_item">
+                <div class="chat_item collapsed">
                     <img src="{% static 'images/test_avatar.png' %}" alt="" class="chat_item_img avatar">
                     <p class="chat_item_text direct">Дмитрий Николаев</p>
                 </div>
-                <div class="chat_item">
+                <div class="chat_item collapsed">
                     <img src="{% static 'images/test_avatar.png' %}" alt="" class="chat_item_img avatar">
                     <p class="chat_item_text direct">Груздев Илья</p>
                 </div>
@@ -275,5 +263,35 @@
         </div>
     </div>
 </div>
+<script>
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Token {{user.auth_token}}');
+    fetch('http://127.0.0.1:8000/api/workspaces/{{workspace.id}}/channels/',{
+        method: 'GET',
+        headers: headers,
+    })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+        .then(data => {
+        var channels_html = '';
+        var image = "{% static 'images/public_channel_img.png' %}";
+        const channels = document.getElementById('chat_items');
+        data['channels'].forEach(item=>{
+            channels_html+='<div class="chat_item collapsed">'+
+                    '<img src="'+image+'" alt="" class="chat_item_img">'+
+                    '<p class="chat_item_text">'+item['name']+'</p>'+
+                '</div>';
+        });
+        channels.innerHTML+=channels_html;
+        })
+        .catch(error => {
+        console.error('Error during fetch operation:', error);
+    });
+</script>
 </body>
 </html>
