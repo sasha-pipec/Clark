@@ -113,58 +113,30 @@
         return response.json();
     })
         .then(data => {
-        // Обработка данных, полученных от сервера
-        // Например, вставим каждый элемент массива в элемент с id="result"
-        console.log(data);
         const userEmail = document.getElementById('user_email');
         userEmail.textContent = 'Рабочие пространства для '+data['email']
         var workspaces_html = '';
         data['workspaces'].forEach(item => {
             var workspace_url = ("{% url 'workspace_detail' 0 %}").replace("0",item['id']);
-            workspaces_html += '<div class="main_workspace_content_workspaces_bottom">'+
-            '<div class="main_workspace_content_workspaces_bottom_left">'+
-            '<div class="main_workspace_content_workspaces_bottom_left_content">' +
-            '<div class="main_workspace_content_workspaces_bottom_left_content_left">'+
-            '<img class="main_workspace_content_workspaces_bottom_left_content_left_img" src="'+item['image']+'" alt="">'+
-            '</div>'+
-            '<div class="main_workspace_content_workspaces_bottom_left_content_right">'+
-            '<div class="main_workspace_content_workspaces_bottom_left_content_right_top">'+
-            '<p class="main_workspace_content_workspaces_bottom_left_content_right_top_title">'+item['name']+'</p>'+
-            '</div>'+
-            '<div class="main_workspace_content_workspaces_bottom_left_content_right_bottom">'+
-            '<div class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images">';
+            var image = item['image'];
+            var name = item['name'];
+            var users_count = item['users_count'];
+            const workspaces = document.getElementById('workspaces');
+            var users = '';
             item['users'].forEach(image=>{
                 if(image['image']!=null){
-                    workspaces_html += '<img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"  src="'+image['image']+'" alt="">';
+                    users += '<img class="main_workspace_content_workspaces_bottom_left_content_right_bottom_images_item"  src="'+image['image']+'" alt="">';
                 }
             });
-            workspaces_html+= '</div>'+
-            '<div class="main_workspace_content_workspaces_bottom_left_content_right_bottom_info">'+
-            '<p class="main_workspace_content_workspaces_bottom_left_content_right_bottom_info_text">'+item['users_count']+' участника</p>'+
-            '</div>'+
-            '</div>'+
-            '</div>'+
-            '</div>'+
-            '</div>'+
-            '<div class="main_workspace_content_workspaces_bottom_right">'+
-            '<div class="main_workspace_content_workspaces_bottom_right_link">'+
-            '<a href="'+workspace_url+'" class="main_workspace_content_workspaces_bottom_right_link_item">Запустить Clark</a>'+
-            '</div>'+
-            '</div>'+
-            '</div>';
+            workspaces.innerHTML+=('{% include "includes/workspace_item.html" with image="image_value" name="name_value" url="workspace_url_value" users="users_value" users_count="users_count_value" %}').replace(
+                "image_value",image
+            ).replace("name_value",name).replace("workspace_url_value",workspace_url).replace("users_value",users).replace("users_count_value",users_count);
         });
         console.log(workspaces_html)
-        const workspaces = document.getElementById('workspaces');
-        workspaces.innerHTML += workspaces_html;
     })
         .catch(error => {
         console.error('Error during fetch operation:', error);
     });
-
-    //    function updateHtml(data) {
-    //        const resultElement = document.getElementById('result');
-    //        resultElement.innerHTML = `<p>${data.message}</p>`;
-    //    }
 </script>
 </body>
 </html>
