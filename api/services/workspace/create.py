@@ -17,9 +17,12 @@ class WorkspaceCreateService(ServiceWithResult):
 
     @property
     def _workspace_create(self):
-        return Workspace.objects.create(
+        workspace =  Workspace.objects.create(
             name=self.cleaned_data['name'],
             about=self.cleaned_data['about'],
             image=self.cleaned_data['image'],
             owner=self.cleaned_data['owner']
         )
+        workspace.users.add(self.cleaned_data['owner'])
+        workspace.save()
+        return workspace

@@ -39,7 +39,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
     workspaces = serializers.SerializerMethodField()
 
     def get_workspaces(self, obj):
-        return WorkspaceSerializer(obj.workspase_set.all(), many=True).data
+        return WorkspaceSerializer(obj.workspace_user_set.all(), many=True).data
 
     class Meta:
         model = User
