@@ -6,7 +6,7 @@ class UserDirectMessage(models.Model):
     direct_message = models.ForeignKey(to='DirectMessage', on_delete=models.CASCADE, verbose_name='Личные сообщения')
 
     def __str__(self):
-        return self.user.username
+        return self.user.email
 
     class Meta:
         db_table = 'user_direct_message'

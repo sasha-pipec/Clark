@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from service_objects.services import ServiceOutcome
 
+from api.services.direct_messages.list_to_user import DirectsListToUserService
 from clark_app.services.workspace.get import WorkspaceDetailService
 
 
@@ -45,6 +46,11 @@ class WorkspaceDetailPageView(View):
     @method_decorator(login_required(login_url='auth'))
     def get(self, request, id):
         outcome = ServiceOutcome(WorkspaceDetailService, {'id': id})
+        directs = ServiceOutcome(DirectsListToUserService, {
+            'workspace_id': outcome.result.id,
+            'user': request.user
+        })
         return render(request, 'clark_app/workspace.html', context={
-            'workspace': outcome.result
+            'workspace': outcome.result,
+            'directs': directs.result
         })

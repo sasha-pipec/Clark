@@ -81,6 +81,11 @@ a {
     width: 33px;
     height: 33px;
     margin-right: 22px;
+    border-radius:10px;
+}
+
+.default{
+    background-color:#FFF;
 }
 
 .main_workspace_container {
