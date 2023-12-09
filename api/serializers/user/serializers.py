@@ -47,3 +47,12 @@ class UserDetailSerializer(serializers.ModelSerializer):
             'email',
             'workspaces'
         )
+
+
+class UserMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'image'
+        )

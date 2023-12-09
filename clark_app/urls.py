@@ -3,7 +3,7 @@ from django.urls import path
 from clark_app.views.pages import (MainPageView, AuthPageView, RegisterPageView,
                                    ConfirmEmailPageView, WorkspacePageView, WorkspaceDetailPageView)
 from clark_app.views.users import (UserCreateView, UserConfirmEmailView, UserLoginView)
-from clark_app.views.workspaces import (WorkspaceCreateView,)
+from clark_app.views.workspaces import (WorkspaceCreateView, )
 
 urlpatterns = [
     # Pages

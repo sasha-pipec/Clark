@@ -3,7 +3,6 @@ from rest_framework import serializers
 from api.serializers.user.serializers import UserImageSerializer
 from models_app.models import Workspace
 
-
 # class WorkspaceSerializer(serializers.ModelSerializer):
 #     users = serializers.SerializerMethodField()
 #     users_count = serializers.SerializerMethodField()

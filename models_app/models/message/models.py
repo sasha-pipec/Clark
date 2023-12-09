@@ -12,9 +12,11 @@ class Message(AbstractTime):
                                verbose_name='Личное сообщение')
     channel = models.ForeignKey(to='Channel', on_delete=models.CASCADE, blank=True, null=True, related_name='chanel_messages',
                                 verbose_name='Сообшение канала')
+    workspace = models.ForeignKey(to='Workspace', on_delete=models.CASCADE, related_name='workspace_messages',
+                                verbose_name='Сообшение рабочего пространства')
 
     def __str__(self):
-        return f'{self.author.username} -- {self.text}'
+        return f'{self.author.email} -- {self.text}'
 
     class Meta:
         db_table = 'message'

@@ -1,4 +1,3 @@
-from django.contrib.auth import authenticate, login
 from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views import View
@@ -9,15 +8,17 @@ from api.services.user.create import UserCreateService
 
 from clark_app.services.user.login import UserLoginService
 
+
 class UserLoginView(View):
 
     def post(self, request):
-        outcome = ServiceOutcome(UserLoginService, request.POST.dict() | {'request':request})
+        outcome = ServiceOutcome(UserLoginService, request.POST.dict() | {'request': request})
         if outcome.result:
             return redirect('workspace')
         return render(request, 'clark_app/authorization.html', context={
             'error': 'Неверная почта или пароль'
         })
+
 
 class UserCreateView(View):
 
@@ -41,6 +42,6 @@ class UserConfirmEmailView(View):
             return render(request, 'clark_app/confirm_email.html', context={
                 'error': error.detail[0]
             })
-        outcome = ServiceOutcome(UserLoginService, request.POST.dict() | {'request':request,
-                                                                          'user':outcome.result})
+        ServiceOutcome(UserLoginService, request.POST.dict() | {'request': request,
+                                                                'user': outcome.result})
         return redirect('workspace')

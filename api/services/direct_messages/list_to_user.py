@@ -8,7 +8,7 @@ from service_objects.services import ServiceWithResult
 from models_app.models import Workspace, User
 
 
-class DirectsListToUserService(ServiceWithResult):
+class DirectListToUserService(ServiceWithResult):
     workspace_id = forms.IntegerField()
     user = ModelField(User)
 
@@ -25,9 +25,13 @@ class DirectsListToUserService(ServiceWithResult):
         receiver_list = []
         directs = workspace.direct_messages.filter(users=self.cleaned_data['user'])
         for direct in directs:
+            direct_id = direct.id
             receiver = direct.users.all().exclude(email=self.cleaned_data['user'].email)
             if receiver.exists():
-                receiver_list.append(receiver.first())
+                receiver = receiver.first()
+                receiver.direct_id=direct_id
+                receiver.save()
+                receiver_list.append(receiver)
         return receiver_list
 
     @lru_cache()

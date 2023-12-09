@@ -11,5 +11,9 @@ class WorkspaceCreateView(View):
 
     @method_decorator(login_required(login_url='auth'))
     def post(self, request):
-        outcome = ServiceOutcome(WorkspaceCreateService, request.POST.dict() | {'owner': request.user}, request.FILES)
-        return redirect('workspace_detail', outcome.result.id)
+        try:
+            outcome = ServiceOutcome(WorkspaceCreateService, request.POST.dict() | {'owner': request.user}, request.FILES)
+            return redirect('workspace_detail', outcome.result.id)
+        except Exception as error:
+            request.session['error'] = error.detail[0]
+            return redirect('workspace')

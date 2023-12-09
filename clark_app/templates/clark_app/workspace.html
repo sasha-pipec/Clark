@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{workspace.name}}</title>
     <link rel="stylesheet" href="{% static 'css/workspace_detail_style.css' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,8 @@
 </head>
 <body>
 <script src="{% static 'js/open_close_items.js' %}"></script>
+<script src="{% static 'js/select_item.js' %}"></script>
+<script src="{% static 'js/send_message.js' %}"></script>
 <div class="main_workspace">
     <div class="main_workspace_header">
         <div class="empty_block">
@@ -66,210 +68,33 @@
                     <p class="chat_item_text">Личные сообщения</p>
                 </div>
                 {% for direct in directs %}
-                    <div class="chat_item collapsed">
-                        {% if direct.image %}
-                            <img src="{{direct.image.url}}" alt="" class="chat_item_img avatar">
-                        {% else %}
-                            <img alt="" class="chat_item_img avatar default">
-                        {% endif %}
-                        <p class="chat_item_text direct">{{direct.email}}</p>
-                    </div>
+                <div class="chat_item collapsed" id="{{direct.email}}"
+                     onclick="select_active_item('{{direct.email}}', '{{direct.direct_id}}', 'direct', '{{workspace.id}}', '{{direct.email}}', '{{user.auth_token}}')">
+                    {% if direct.image %}
+                    <img src="{{direct.image.url}}" alt="" class="chat_item_img avatar">
+                    {% else %}
+                    <img alt="" class="chat_item_img avatar default">
+                    {% endif %}
+                    <p class="chat_item_text direct">{{direct.email}}</p>
+                </div>
                 {% endfor %}
             </div>
         </div>
         <div class="container_main">
             <div class="main_header">
-                <p class="header_title">оффтоп</p>
+                <p class="header_title" id="header_title"></p>
                 <img src="{% static 'images/drop_down_channel_name_img.png' %}" alt="" class="header_img">
             </div>
-            <div class="messages">
-                <div class="message_block">
-                    <div class="message_block_left">
-                        <img src="{% static 'images/test_avatar.png' %}" alt="" class="message_avatar">
-                    </div>
-                    <div class="message_block_right">
-                        <div class="message_info">
-                            <div class="message_author">
-                                <p class="author_name">Максим Караичев</p>
-                                <p class="message_created_at">26.05.23</p>
-                            </div>
-                            <div class="message_text">
-                                <p class="message_text_inner">
-                                    Сертификация также позволяет предприятиям соблюдать законодательство и регулирование в различных отраслях. Она
-                                    может быть обязательной для предприятий, которые работают в чувствительных сферах, таких как медицина, пищевая
-                                    промышленность или авиация
-                                </p>
-                            </div>
-                            <div class="message_threads">
+            <div class="messages" id="messages">
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message_block">
-                    <div class="message_block_left">
-                        <img src="{% static 'images/test_avatar.png' %}" alt="" class="message_avatar">
-                    </div>
-                    <div class="message_block_right">
-                        <div class="message_info">
-                            <div class="message_author">
-                                <p class="author_name">Максим Караичев</p>
-                                <p class="message_created_at">26.05.23</p>
-                            </div>
-                            <div class="message_text">
-                                <p class="message_text_inner">
-                                    Сертификация также позволяет предприятиям соблюдать законодательство и регулирование в различных отраслях. Она
-                                    может быть обязательной для предприятий, которые работают в чувствительных сферах, таких как медицина, пищевая
-                                    промышленность или авиация
-                                </p>
-                            </div>
-                            <div class="message_threads">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message_block">
-                    <div class="message_block_left">
-                        <img src="{% static 'images/test_avatar.png' %}" alt="" class="message_avatar">
-                    </div>
-                    <div class="message_block_right">
-                        <div class="message_info">
-                            <div class="message_author">
-                                <p class="author_name">Максим Караичев</p>
-                                <p class="message_created_at">26.05.23</p>
-                            </div>
-                            <div class="message_text">
-                                <p class="message_text_inner">
-                                    Сертификация также позволяет предприятиям соблюдать законодательство и регулирование в различных отраслях. Она
-                                    может быть обязательной для предприятий, которые работают в чувствительных сферах, таких как медицина, пищевая
-                                    промышленность или авиация
-                                </p>
-                            </div>
-                            <div class="message_threads">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message_block">
-                    <div class="message_block_left">
-                        <img src="{% static 'images/test_avatar.png' %}" alt="" class="message_avatar">
-                    </div>
-                    <div class="message_block_right">
-                        <div class="message_info">
-                            <div class="message_author">
-                                <p class="author_name">Максим Караичев</p>
-                                <p class="message_created_at">26.05.23</p>
-                            </div>
-                            <div class="message_text">
-                                <p class="message_text_inner">
-                                    Сертификация также позволяет предприятиям соблюдать законодательство и регулирование в различных отраслях. Она
-                                    может быть обязательной для предприятий, которые работают в чувствительных сферах, таких как медицина, пищевая
-                                    промышленность или авиация
-                                </p>
-                            </div>
-                            <div class="message_threads">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message_block">
-                    <div class="message_block_left">
-                        <img src="{% static 'images/test_avatar.png' %}" alt="" class="message_avatar">
-                    </div>
-                    <div class="message_block_right">
-                        <div class="message_info">
-                            <div class="message_author">
-                                <p class="author_name">Максим Караичев</p>
-                                <p class="message_created_at">26.05.23</p>
-                            </div>
-                            <div class="message_text">
-                                <p class="message_text_inner">
-                                    Сертификация также позволяет предприятиям соблюдать законодательство и регулирование в различных отраслях. Она
-                                    может быть обязательной для предприятий, которые работают в чувствительных сферах, таких как медицина, пищевая
-                                    промышленность или авиация
-                                </p>
-                            </div>
-                            <div class="message_threads">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message_block">
-                    <div class="message_block_left">
-                        <img src="{% static 'images/test_avatar.png' %}" alt="" class="message_avatar">
-                    </div>
-                    <div class="message_block_right">
-                        <div class="message_info">
-                            <div class="message_author">
-                                <p class="author_name">Максим Караичев</p>
-                                <p class="message_created_at">26.05.23</p>
-                            </div>
-                            <div class="message_text">
-                                <p class="message_text_inner">
-                                    Сертификация также позволяет предприятиям соблюдать законодательство и регулирование в различных отраслях. Она
-                                    может быть обязательной для предприятий, которые работают в чувствительных сферах, таких как медицина, пищевая
-                                    промышленность или авиация
-                                </p>
-                            </div>
-                            <div class="message_threads">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message_block">
-                    <div class="message_block_left">
-                        <img src="{% static 'images/test_avatar.png' %}" alt="" class="message_avatar">
-                    </div>
-                    <div class="message_block_right">
-                        <div class="message_info">
-                            <div class="message_author">
-                                <p class="author_name">Максим Караичев</p>
-                                <p class="message_created_at">26.05.23</p>
-                            </div>
-                            <div class="message_text">
-                                <p class="message_text_inner">
-                                    Сертификация также позволяет предприятиям соблюдать законодательство и регулирование в различных отраслях. Она
-                                    может быть обязательной для предприятий, которые работают в чувствительных сферах, таких как медицина, пищевая
-                                    промышленность или авиация
-                                </p>
-                            </div>
-                            <div class="message_threads">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message_block">
-                    <div class="message_block_left">
-                        <img src="{% static 'images/test_avatar.png' %}" alt="" class="message_avatar">
-                    </div>
-                    <div class="message_block_right">
-                        <div class="message_info">
-                            <div class="message_author">
-                                <p class="author_name">Максим Караичев</p>
-                                <p class="message_created_at">26.05.23</p>
-                            </div>
-                            <div class="message_text">
-                                <p class="message_text_inner">
-                                    Сертификация также позволяет предприятиям соблюдать законодательство и регулирование в различных отраслях. Она
-                                    может быть обязательной для предприятий, которые работают в чувствительных сферах, таких как медицина, пищевая
-                                    промышленность или авиация
-                                </p>
-                            </div>
-                            <div class="message_threads">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="send_block">
-                <input type="text" class="send_input" placeholder="Введите сообщение">
+                <form style="height:100%">
+                    <input type="hidden" name="type" value="" id="message_type">
+                    <input type="hidden" name="item_id" value="" id="message_item_id">
+                    <input type="hidden" name="workspace_id" value="{{workspace.id}}" id="workspace_id">
+                    <input required type="text" class="send_input" placeholder="Введите сообщение" name="text" onkeydown="send_message(event, '{{user.auth_token}}')" id="text">
+                </form>
             </div>
         </div>
         <div class="container_right">
@@ -296,7 +121,7 @@
         var image = "{% static 'images/public_channel_img.png' %}";
         const channels = document.getElementById('chat_items');
         data['channels'].forEach(item=>{
-            channels_html+='<div class="chat_item collapsed">'+
+            channels_html+='<div class="chat_item collapsed" id="'+item['id']+'" onclick="select_active_item('+item['id']+', '+item['id']+','+"'channel','"+{{workspace.id}}+"', '"+item["name"]+"', '"+'{{user.auth_token}}'+"'"+')">'+
             '<img src="'+image+'" alt="" class="chat_item_img">'+
             '<p class="chat_item_text">'+item['name']+'</p>'+
             '</div>';
