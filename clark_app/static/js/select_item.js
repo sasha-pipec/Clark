@@ -1,3 +1,5 @@
+var socket;
+
 function select_active_item(html_id, item_id, type, workspace_id, item_name, token){
     const message_type = document.getElementById('message_type');
     message_type.value = type;
@@ -63,9 +65,83 @@ function select_active_item(html_id, item_id, type, workspace_id, item_name, tok
                             '</div>';
         });
         messages.innerHTML = messages_html;
-        console.log(messages_html);
+        socket = new WebSocket('ws://127.0.0.1:8000/ws/chat/'+type+'_'+item_id);
+        socket.onmessage = function (e) {
+                const data = JSON.parse(e.data);
+                const messages = document.getElementById('messages');
+                messages.innerHTML+='<div class="message_block">'+
+                                '<div class="message_block_left">'+
+                                    '<img src="'+data['author_image']+'" alt="" class="message_avatar">'+
+                                '</div>'+
+                                '<div class="message_block_right">'+
+                                    '<div class="message_info">'+
+                                        '<div class="message_author">'+
+                                            '<p class="author_name">'+data['author_email']+'</p>'+
+                                            '<p class="message_created_at">'+data['created_at']+'</p>'+
+                                        '</div>'+
+                                        '<div class="message_text">'+
+                                            '<p class="message_text_inner">'+
+                                                data['text']+
+                                            '</p>'+
+                                        '</div>'+
+                                        '<div class="message_threads">'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>';
+                console.log(data);
+            };
     })
         .catch(error => {
         console.error('Error during fetch operation:', error);
     });
+}
+
+function send_message(event, token){
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        var type = document.getElementById('message_type').value;
+        var item_id = document.getElementById('message_item_id').value;
+        var text = document.getElementById('text');
+        var workspace_id = document.getElementById('workspace_id').value;
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Token '+token+'');
+        var options = {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            };
+        fetch('http://127.0.0.1:8000/api/messages/', {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                "type":type,
+                "item_id":item_id,
+                "text":text.value,
+                "workspace_id":workspace_id,
+            })
+        })
+            .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
+            .then(data => {
+            console.log(data);
+            console.log(socket);
+            socket.send(JSON.stringify({
+                'author_image': data['author']['image'],
+                'author_email': data['author']['email'],
+                'created_at':new Date(data['created_at']).toLocaleDateString("ru", options),
+                'text':data['text']
+            }));
+
+        })
+            .catch(error => {
+            console.error('Error during fetch operation:', error);
+        });
+        text.value='';
+  }
 }
