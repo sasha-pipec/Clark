@@ -116,7 +116,11 @@
         </div>
         <div class="container_right">
             <div class="photo_profile">
+                {% if user.image %}
                 <img class="profile_image" src="{{user.image.url}}" alt="" id="profile_image">
+                {% else %}
+                <img class="profile_image" src="{% static 'images/anonim_user.jpg' %}" alt="" id="profile_image">
+                {% endif %}
             </div>
             <div class="email_profile">
                 <p class="profile_email" id="email_profile">{{user.email}}</p>

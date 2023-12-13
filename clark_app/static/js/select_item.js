@@ -71,6 +71,10 @@ function select_active_item(html_id, item_id, type, workspace_id, item_name, tok
             var user_email = item['author']['email'];
             var created_at = item['created_at'];
             var text = item['text'];
+                if(user_image==null){
+                    user_image = "http://127.0.0.1:8000/static/images/anonim_user.jpg";
+                }
+                console.log(user_image);
             messages_html+='<div class="message_block">'+
                                 '<div class="message_block_left">'+
                                     '<img src="'+user_image+'" alt="" class="message_avatar" onclick="show_profile('+"'"+email+"','"+user_email+"','"+user_image+"'"+')">'+
@@ -100,9 +104,9 @@ function select_active_item(html_id, item_id, type, workspace_id, item_name, tok
         socket.onmessage = function (e) {
                 const data = JSON.parse(e.data);
                 const messages = document.getElementById('messages');
-                const photo = data['author_image']
-                if(data['author_image']==''){
-                    photo = "static/images/test_avatar.png";
+                var photo = data['author_image'];
+                if(data['author_image']==null){
+                    photo = "http://127.0.0.1:8000/static/images/anonim_user.jpg/";
                 }
                 messages.innerHTML+='<div class="message_block">'+
                                 '<div class="message_block_left">'+
@@ -124,7 +128,6 @@ function select_active_item(html_id, item_id, type, workspace_id, item_name, tok
                                     '</div>'+
                                 '</div>'+
                             '</div>';
-                console.log(data);
             };
     })
         .catch(error => {
@@ -164,8 +167,6 @@ function send_message(event, token){
             return response.json();
         })
             .then(data => {
-            console.log(data);
-            console.log(socket);
             socket.send(JSON.stringify({
                 'author_image': data['author']['image'],
                 'author_email': data['author']['email'],
