@@ -20,14 +20,14 @@
 
         </div>
         <div class="header_search">
-            <input type="text" class="search_input" placeholder="Поиск в проекте">
+<!--            <input type="text" class="search_input" placeholder="Поиск в проекте">-->
         </div>
         <div class="header_avatar">
-            {% if user.image %}
-            <img src="{{user.image.url}}" alt="" class="avatar_img">
-            {% else %}
-            <img alt="" class="avatar_img default">
-            {% endif %}
+<!--            {% if user.image %}-->
+<!--            <img src="{{user.image.url}}" alt="" class="avatar_img">-->
+<!--            {% else %}-->
+<!--            <img alt="" class="avatar_img default">-->
+<!--            {% endif %}-->
         </div>
     </div>
     <div class="main_workspace_container">
@@ -38,17 +38,23 @@
                     <img src="{% static 'images/workspace_img_title.png' %}" alt="" class="title_img">
                 </div>
             </div>
-            <div class="main_navbar">
-                <div class="navbar_item">
-                    <a href="" class="navbar_item_text">Ответы</a>
-                </div>
-                <div class="navbar_item">
-                    <a href="" class="navbar_item_text">Личные сообщения</a>
-                </div>
-                <div class="navbar_item">
-                    <a href="" class="navbar_item_text">Упоминания & Реакции</a>
-                </div>
-            </div>
+                        <div class="main_navbar">
+                            <div class="navbar_item">
+                                <a href="{% url 'workspace_exit' %}" class="navbar_item_text">Выйти из рабочего пространства</a>
+                            </div>
+                            <div class="navbar_item">
+                                <a name="{% url 'workspace_invite' workspace.id %}" onclick="get_invite_code()"  class="navbar_item_text" id="invite">Получить код для приглашения</a>
+                            </div>
+<!--                            <div class="navbar_item">-->
+<!--                                <a href="" class="navbar_item_text">Ответы</a>-->
+<!--                            </div>-->
+<!--                            <div class="navbar_item">-->
+<!--                                <a href="" class="navbar_item_text">Личные сообщения</a>-->
+<!--                            </div>-->
+<!--                            <div class="navbar_item">-->
+<!--                                <a href="" class="navbar_item_text">Упоминания & Реакции</a>-->
+<!--                            </div>-->
+                        </div>
             <div class="chats_list" id="channels">
                 <div class="chat_item" onclick="toggleChatList(this)">
                     <img src="{% static 'images/list_img.png' %}" alt="" class="chat_item_img list_img">
@@ -57,9 +63,13 @@
                 <div id="chat_items">
 
                 </div>
-                <div class="chat_item open">
+                <div class="chat_item open" onclick="open_channel_popap()">
                     <img src="{% static 'images/add_channel_img.png' %}" alt="" class="chat_item_img add_channel">
                     <p class="chat_item_text add_channel_text">Добавить канал</p>
+                </div>
+                <div class="chat_item add_channel_popap vision" id="channel_popap">
+                    <a class="item_link" onclick="open_popap()">Добавить новый канал</a>
+                    <a href="{% url 'channels' workspace.id %}" class="item_link">Просмотреть каналы</a>
                 </div>
             </div>
             <div class="chats_list">
@@ -69,7 +79,7 @@
                 </div>
                 {% for direct in directs %}
                 <div class="chat_item collapsed" id="{{direct.email}}"
-                     onclick="select_active_item('{{direct.email}}', '{{direct.direct_id}}', 'direct', '{{workspace.id}}', '{{direct.email}}', '{{user.auth_token}}')">
+                     onclick="select_active_item('{{direct.email}}', '{{direct.direct_id}}', 'direct', '{{workspace.id}}', '{{direct.email}}', '{{user.auth_token}}', '{{user.email}}')">
                     {% if direct.image %}
                     <img src="{{direct.image.url}}" alt="" class="chat_item_img avatar">
                     {% else %}
@@ -80,10 +90,16 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="container_main">
+        <div class="container_main" id="container_main">
             <div class="main_header">
-                <p class="header_title" id="header_title"></p>
-                <img src="{% static 'images/drop_down_channel_name_img.png' %}" alt="" class="header_img">
+                <div class="main_header info">
+                    <img src="{% static 'images/#.png' %}" alt="" class="header_img header_chat_img">
+                    <p class="header_title" id="header_title"></p>
+                    <img src="{% static 'images/drop_down_channel_name_img.png' %}" alt="" class="header_img">
+                </div>
+                <div class="main_header exit">
+                    <a href="{% url 'channels_exit_user' 0 %}" class="exit_channel" id="exit_channel"></a>
+                </div>
             </div>
             <div class="messages" id="messages">
 
@@ -93,13 +109,60 @@
                     <input type="hidden" name="type" value="" id="message_type">
                     <input type="hidden" name="item_id" value="" id="message_item_id">
                     <input type="hidden" name="workspace_id" value="{{workspace.id}}" id="workspace_id">
-                    <input required type="text" class="send_input" placeholder="Введите сообщение" name="text" onkeydown="send_message(event, '{{user.auth_token}}')" id="text">
+                    <input required type="text" class="send_input" placeholder="Введите сообщение" name="text"
+                           onkeydown="send_message(event, '{{user.auth_token}}')" id="text">
                 </form>
             </div>
         </div>
         <div class="container_right">
-
+            <div class="photo_profile">
+                <img class="profile_image" src="{{user.image.url}}" alt="" id="profile_image">
+            </div>
+            <div class="email_profile">
+                <p class="profile_email" id="email_profile">{{user.email}}</p>
+            </div>
+            <div class="direct_message">
+                <form action="{% url 'directs' workspace.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="current_email" id="current_email">
+                    <input type="hidden" name="email" id="email">
+                    <button class="direct_btn" id="direct_btn">
+                        Написать в личные сообщения
+                    </button>
+                </form>
+            </div>
         </div>
+    </div>
+</div>
+<div class="main_create_workspace" id="popap">
+    <div class="main_create_workspace_form">
+        <form class="main_create_workspace_form_item" action="{% url 'channels' workspace.id %}" method="post">
+            {% csrf_token %}
+            <div class="main_create_workspace_form_item_top">
+                <p class="main_create_workspace_form_item_top_text">
+                    Создание нового канала
+                </p>
+                <a onclick="close_popap();"><img src="{% static 'images/close_create_workspace.png' %}" alt=""
+                                                 class="main_create_workspace_form_item_top_img"></a>
+            </div>
+            <div class="main_create_workspace_form_item_main">
+                <div class="main_create_workspace_form_item_main_item">
+                    <p class="main_create_workspace_form_item_main_item_text">
+                        Название канала
+                    </p>
+                    <input type="text" class="main_create_workspace_form_item_main_item_text_input" name="name">
+                </div>
+                <div class="main_create_workspace_form_item_main_item">
+                    <p class="main_create_workspace_form_item_main_item_text">
+                        Описание
+                    </p>
+                    <input type="text" class="main_create_workspace_form_item_main_item_text_input textarea" name="description">
+                </div>
+            </div>
+            <div class="main_create_workspace_form_item_bottom">
+                <button class="main_create_workspace_form_item_bottom_btn">Создать канал</button>
+            </div>
+        </form>
     </div>
 </div>
 <script>
@@ -121,7 +184,7 @@
         var image = "{% static 'images/public_channel_img.png' %}";
         const channels = document.getElementById('chat_items');
         data['channels'].forEach(item=>{
-            channels_html+='<div class="chat_item collapsed" id="'+item['id']+'" onclick="select_active_item('+item['id']+', '+item['id']+','+"'channel','"+{{workspace.id}}+"', '"+item["name"]+"', '"+'{{user.auth_token}}'+"'"+')">'+
+            channels_html+='<div class="chat_item collapsed" id="'+item['id']+'" onclick="select_active_item('+item['id']+', '+item['id']+','+"'channel','"+{{workspace.id}}+"', '"+item["name"]+"', '"+'{{user.auth_token}}'+"', '"+'{{user.email}}'+"'"+');">'+
             '<img src="'+image+'" alt="" class="chat_item_img">'+
             '<p class="chat_item_text">'+item['name']+'</p>'+
             '</div>';

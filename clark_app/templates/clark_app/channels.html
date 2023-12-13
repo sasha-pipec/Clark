@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Каналы</title>
+    <link rel="stylesheet" href="{% static 'css/channel_style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="{% url 'channels' workspace_id %}" class="all_channels"><p class="header_text">Все каналы</p></a>
+        <a href="{% url 'workspace_detail' workspace_id %}" class="all_channels"><p class="header_text back">назад</p></a>
+    </div>
+    <div class="search">
+        <form action="{% url 'channels' workspace_id %}" class="search">
+            <input type="text" class="search_input" placeholder="Поиск среди каналов" name="search">
+        </form>
+    </div>
+    <div class="channel_list">
+        {% for channel in channels %}
+        <div class="channel_item">
+            <div class="item_wrapper">
+                <div class="item_top">
+                    <p class="item_img">#</p>
+                    <p class="item_text">{{channel.name}}</p>
+                </div>
+                <div class="item_bottom">
+                        <div class="item_members">
+                            участников: {{channel.count}}
+                        </div>
+                </div>
+            </div>
+            <a href="{% url 'channels_add_user' channel.id %}" class="added">
+                <div class="item_btn">
+                    <p class="btn_text">
+                        Присоединиться
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views import View
@@ -45,3 +46,8 @@ class UserConfirmEmailView(View):
         ServiceOutcome(UserLoginService, request.POST.dict() | {'request': request,
                                                                 'user': outcome.result})
         return redirect('workspace')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('main')

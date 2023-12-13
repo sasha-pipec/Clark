@@ -44,8 +44,8 @@ class WorkspacePageView(View):
             return render(request, 'clark_app/workspaces.html', context={
                 'error': error
             })
-        # if request.session.get('active_workspace'):
-        #     return redirect('workspace_detail', request.session['active_workspace'])
+        if request.session.get('active_workspace'):
+            return redirect('workspace_detail', request.session['active_workspace'])
         return render(request, 'clark_app/workspaces.html')
 
 

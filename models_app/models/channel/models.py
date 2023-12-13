@@ -5,6 +5,7 @@ from models_app.models.abstract_time.models import AbstractTime
 
 class Channel(AbstractTime):
     name = models.CharField(max_length=255, verbose_name='Название')
+    description = models.TextField(verbose_name='Описание')
     users = models.ManyToManyField(to='User', through='UserChannel', verbose_name='Участники')
     workspace = models.ForeignKey(to='Workspace', on_delete=models.CASCADE, related_name='channels', verbose_name='Рабочее пространство')
 

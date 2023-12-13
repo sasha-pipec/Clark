@@ -33,6 +33,7 @@ body{
     height:129px;
     display:flex;
     margin:auto;
+    justify-content:space-between;
 }
 
 .main_workspace_header_logo{

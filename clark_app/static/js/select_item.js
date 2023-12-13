@@ -1,6 +1,34 @@
 var socket;
 
-function select_active_item(html_id, item_id, type, workspace_id, item_name, token){
+function show_profile(current_email, email, photo){
+    const current_email_inp = document.getElementById('current_email');
+    current_email_inp.value = current_email;
+    const email_inp = document.getElementById('email');
+    email_inp.value = email;
+    const image = document.getElementById('profile_image');
+    image.src = photo;
+    const email_block = document.getElementById('email_profile');
+    email_block.textContent = email;
+    const btn = document.getElementById('direct_btn');
+    if(current_email!==email){
+        btn.style.display = "flex";
+        btn.style.margin = "auto";
+        btn.style.marginTop = "20px";
+    }else{
+       btn.style.display = "none";
+    }
+}
+
+function select_active_item(html_id, item_id, type, workspace_id, item_name, token, email){
+    const exit_channel = document.getElementById('exit_channel');
+    if(type!=="channel"){
+        exit_channel.textContent = " ";
+    }else{
+        exit_channel.href = exit_channel.href.replace("/0/", "/"+item_id+"/");
+        exit_channel.textContent = "выйти";
+    }
+    const container = document.getElementById('container_main');
+    container.style.opacity = 100;
     const message_type = document.getElementById('message_type');
     message_type.value = type;
     const message_item_id = document.getElementById('message_item_id');
@@ -45,7 +73,7 @@ function select_active_item(html_id, item_id, type, workspace_id, item_name, tok
             var text = item['text'];
             messages_html+='<div class="message_block">'+
                                 '<div class="message_block_left">'+
-                                    '<img src="'+user_image+'" alt="" class="message_avatar">'+
+                                    '<img src="'+user_image+'" alt="" class="message_avatar" onclick="show_profile('+"'"+email+"','"+user_email+"','"+user_image+"'"+')">'+
                                 '</div>'+
                                 '<div class="message_block_right">'+
                                     '<div class="message_info">'+
@@ -65,13 +93,20 @@ function select_active_item(html_id, item_id, type, workspace_id, item_name, tok
                             '</div>';
         });
         messages.innerHTML = messages_html;
+        if(socket instanceof WebSocket){
+            socket.close();
+        }
         socket = new WebSocket('ws://127.0.0.1:8000/ws/chat/'+type+'_'+item_id);
         socket.onmessage = function (e) {
                 const data = JSON.parse(e.data);
                 const messages = document.getElementById('messages');
+                const photo = data['author_image']
+                if(data['author_image']==''){
+                    photo = "static/images/test_avatar.png";
+                }
                 messages.innerHTML+='<div class="message_block">'+
                                 '<div class="message_block_left">'+
-                                    '<img src="'+data['author_image']+'" alt="" class="message_avatar">'+
+                                    '<img src="'+photo+'" alt="" class="message_avatar">'+
                                 '</div>'+
                                 '<div class="message_block_right">'+
                                     '<div class="message_info">'+
@@ -144,4 +179,28 @@ function send_message(event, token){
         });
         text.value='';
   }
+}
+
+function open_channel_popap(){
+    const popap = document.getElementById('channel_popap');
+    if(popap.classList.contains("vision")){
+        popap.classList.remove("vision");
+    }else{
+        popap.classList.add("vision");
+    }
+}
+
+function  open_popap(){
+    const element = document.getElementById('popap');
+     element.style.display = 'flex';
+}
+
+function  close_popap(){
+    const element = document.getElementById('popap');
+     element.style.display = 'none';
+}
+
+function get_invite_code(){
+    const invite = document.getElementById('invite');
+    alert("Код для подключения: "+"http://"+window.location.hostname+":8000"+invite.name);
 }
