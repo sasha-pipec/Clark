@@ -173,7 +173,7 @@
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Token {{user.auth_token}}');
-    fetch('http://127.0.0.1:8000/api/workspaces/{{workspace.id}}/channels/',{
+    fetch('http://127.0.0.1:8001/api/workspaces/{{workspace.id}}/channels/',{
         method: 'GET',
         headers: headers,
     })

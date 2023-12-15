@@ -46,7 +46,7 @@ function select_active_item(html_id, item_id, type, workspace_id, item_name, tok
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Token '+token+'');
-    fetch('http://127.0.0.1:8000/api/messages/?item_id='+item_id+'&type='+type+'&workspace_id='+workspace_id+'',{
+    fetch('http://127.0.0.1:8001/api/messages/?item_id='+item_id+'&type='+type+'&workspace_id='+workspace_id+'',{
         method: 'GET',
         headers: headers,
     })
@@ -100,13 +100,13 @@ function select_active_item(html_id, item_id, type, workspace_id, item_name, tok
         if(socket instanceof WebSocket){
             socket.close();
         }
-        socket = new WebSocket('ws://127.0.0.1:8000/ws/chat/'+type+'_'+item_id);
+        socket = new WebSocket('ws://127.0.0.1:8001/ws/chat/'+type+'_'+item_id);
         socket.onmessage = function (e) {
                 const data = JSON.parse(e.data);
                 const messages = document.getElementById('messages');
                 var photo = data['author_image'];
                 if(data['author_image']==null){
-                    photo = "http://127.0.0.1:8000/static/images/anonim_user.jpg/";
+                    photo = "http://127.0.0.1:8001/static/images/anonim_user.jpg/";
                 }
                 messages.innerHTML+='<div class="message_block">'+
                                 '<div class="message_block_left">'+
@@ -150,7 +150,7 @@ function send_message(event, token){
               month: 'long',
               day: 'numeric',
             };
-        fetch('http://127.0.0.1:8000/api/messages/', {
+        fetch('http://127.0.0.1:8001/api/messages/', {
             method: 'POST',
             headers: headers,
             body: JSON.stringify({
@@ -203,5 +203,5 @@ function  close_popap(){
 
 function get_invite_code(){
     const invite = document.getElementById('invite');
-    alert("Код для подключения: "+"http://"+window.location.hostname+":8000"+invite.name);
+    alert("Код для подключения: "+"http://"+window.location.hostname+":8001"+invite.name);
 }
